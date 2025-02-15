@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { DIFFICULTY_LEVELS, PUZZLE_IMAGES } from '../constants/puzzleConfig'
 import CompletionModal from './CompletionModal'
 import Timer from './Timer'
+import SolvedImage from './SolvedImage'
 
 const Puzzle = ({ initialDifficulty, onQuit }) => {
   const [complete, setComplete] = useState(false)
@@ -39,24 +40,33 @@ const Puzzle = ({ initialDifficulty, onQuit }) => {
   }
 
   return (
-    <div className="puzzle-container">
-      <Timer 
-        isRunning={imageLoaded && !complete} 
-        onTimeUpdate={setTime}
-      />
-      
-      {imageLoaded ? (
-        <div className="puzzle-wrapper">
-          <JigsawPuzzle
-            key={key} // Add key prop to force re-render
-            imageSrc={currentImage.url}
-            rows={DIFFICULTY_LEVELS[initialDifficulty].rows}
-            columns={DIFFICULTY_LEVELS[initialDifficulty].columns}
-            onSolved={handleComplete}
-          />
-        </div>
-      ) : (
-        <div className="loading">Loading puzzle...</div>
+    <div className="puzzle-game-layout">
+      <div className="puzzle-container">
+        <Timer 
+          isRunning={imageLoaded && !complete} 
+          onTimeUpdate={setTime}
+        />
+        
+        {imageLoaded ? (
+          <div className="puzzle-wrapper">
+            <JigsawPuzzle
+              key={key}
+              imageSrc={currentImage.url}
+              rows={DIFFICULTY_LEVELS[initialDifficulty].rows}
+              columns={DIFFICULTY_LEVELS[initialDifficulty].columns}
+              onSolved={handleComplete}
+            />
+          </div>
+        ) : (
+          <div className="loading">Loading puzzle...</div>
+        )}
+      </div>
+
+      {imageLoaded && (
+        <SolvedImage 
+          imageUrl={currentImage.url} 
+          difficulty={initialDifficulty}
+        />
       )}
       
       {complete && (
