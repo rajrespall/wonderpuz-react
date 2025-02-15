@@ -11,13 +11,18 @@ const Timer = ({ isRunning, onTimeUpdate }) => {
       intervalId = setInterval(() => {
         setTime(prevTime => {
           const newTime = prevTime + 1
-          onTimeUpdate(newTime)
+          // Move the parent update to the next tick to avoid render conflicts
+          setTimeout(() => onTimeUpdate(newTime), 0)
           return newTime
         })
       }, 1000)
     }
 
-    return () => clearInterval(intervalId)
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId)
+      }
+    }
   }, [isRunning, onTimeUpdate])
 
   const formatTime = (seconds) => {

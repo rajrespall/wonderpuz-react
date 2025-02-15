@@ -29,7 +29,6 @@ const SolvedImage = ({ imageUrl, difficulty }) => {
 
   return (
     <div className="guide-image-container">
-      <h3 className="pixel-text">Guide Image</h3>
       <div style={getGridStyle(difficulty)}>
         {Array.from({ length: difficulty === 'EASY' ? 4 : difficulty === 'MEDIUM' ? 9 : 16 }).map((_, index) => (
           <div key={index} className="grid-cell">
