@@ -32,15 +32,15 @@ body {
   z-index: 1;
 }
 
-/* Update puzzle container styles */
+/* Update puzzle container and wrapper styles */
 .puzzle-container {
-  width: 95%;
-  max-width: 500px;
+  width: 100%;
+  max-width: 600px;
   margin: 0;
-  background-color: #ffffff; /* Light background */
+  background-color: #ffffff;
   padding: 1rem;
-  border: 4px solid #4a4a4a; /* Darker border */
-  box-shadow: 0 0 0 4px #e0e0e0; /* Light shadow */
+  border: 4px solid #4a4a4a;
+  box-shadow: 0 0 0 4px #e0e0e0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,15 +48,14 @@ body {
   box-sizing: border-box;
   position: relative;
   z-index: 1;
-  flex: 0 1 500px;
+  flex: 0 1 auto;
 }
 
 .puzzle-wrapper {
   width: 100%;
-  max-width: 450px;
   aspect-ratio: 1;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   z-index: 1;
 }
 
@@ -64,8 +63,8 @@ body {
 .react-jigsaw-puzzle {
   width: 100% !important;
   height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
 }
 
 .react-jigsaw-puzzle > div {
@@ -78,8 +77,6 @@ body {
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
 }
 
 /* Text Styles */
@@ -142,12 +139,13 @@ h2.pixel-text {
 /* Responsive Design */
 @media (max-width: 768px) {
   .puzzle-container {
-    width: 95%;
     padding: 0.5rem;
+    max-width: 95vw;
   }
 
   .puzzle-wrapper {
-    max-width: 85vmin;
+    width: 100%;
+    max-width: none;
   }
 
   .game-info {
